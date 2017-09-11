@@ -17,8 +17,8 @@ export default class Network extends Component {
   }
 
   componentWillUnmount() {
-    window.addEventListener("offline", this.handleChange)
-    window.addEventListener("online", this.handleChange)
+    window.removeEventListener("offline", this.handleChange)
+    window.removeEventListener("online", this.handleChange)
   }
 
   handleChange = () => {
