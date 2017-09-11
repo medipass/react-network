@@ -160,13 +160,13 @@ yarn add react-network
 ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">(</span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Network</span>
     <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">{</span> online <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-      <span class="token keyword">if</span> <span class="token punctuation">(</span>online<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>online <span class="token operator">&amp;&amp;</span> window<span class="token punctuation">.</span>cornify_add<span class="token punctuation">)</span> <span class="token punctuation">{</span>
         window<span class="token punctuation">.</span><span class="token function">cornify_add</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
       <span class="token punctuation">}</span>
     <span class="token punctuation">}</span></span><span class="token attr-name">}</span>
     <span class="token attr-name">render</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">{</span> online <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span>
       <span class="token operator">&lt;</span>div style<span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> textAlign<span class="token punctuation">:</span> <span class="token string">'center'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Every time you go offline<span class="token punctuation">,</span> a unicorn is born<span class="token operator">!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Every time you go back online<span class="token punctuation">,</span> a unicorn is born<span class="token operator">!</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
           You can open up the devtools to simulate losing the
           network<span class="token punctuation">,</span> or actually turn off your wifi to see these demos<span class="token punctuation">.</span>
@@ -182,22 +182,22 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   <span class="token operator">/</span><span class="token operator">></span>
 <span class="token punctuation">)</span><span class="token punctuation">,</span> DOM_NODE<span class="token punctuation">)</span>
 </code></pre>
-<div id="render-l5uds8047p" class="render-js"></div>
+<div id="render-4n6dq15blr8" class="render-js"></div>
 <script type="text/babel">
-(function() { var DOM_NODE = document.getElementById("render-l5uds8047p");
+(function() { var DOM_NODE = document.getElementById("render-4n6dq15blr8");
 // import Network from 'react-network'
 const Network = ReactNetwork.default
 
 ReactDOM.render((
   <Network
     onChange={({ online }) => {
-      if (online) {
+      if (online && window.cornify_add) {
         window.cornify_add()
       }
     }}
     render={({ online }) =>
       <div style={{ textAlign: 'center' }}>
-        <p>Every time you go offline, a unicorn is born!</p>
+        <p>Every time you go back online, a unicorn is born!</p>
         <p>
           You can open up the devtools to simulate losing the
           network, or actually turn off your wifi to see these demos.
@@ -226,9 +226,9 @@ ReactDOM<span class="token punctuation">.</span><span class="token function">ren
   <span class="token punctuation">}</span></span><span class="token punctuation">/></span></span>
 <span class="token punctuation">)</span><span class="token punctuation">,</span> DOM_NODE<span class="token punctuation">)</span>
 </code></pre>
-<div id="render-bhjiu5u8ffo" class="render-js"></div>
+<div id="render-csnijna062" class="render-js"></div>
 <script type="text/babel">
-(function() { var DOM_NODE = document.getElementById("render-bhjiu5u8ffo");
+(function() { var DOM_NODE = document.getElementById("render-csnijna062");
 // import Network from 'react-network'
 const Network = ReactNetwork.default
 ReactDOM.render((
@@ -246,43 +246,45 @@ ReactDOM.render((
 
 <span class="token keyword">class</span> <span class="token class-name">App</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
   state <span class="token operator">=</span> <span class="token punctuation">{</span>
-    gists<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    image<span class="token punctuation">:</span> <span class="token keyword">null</span>
   <span class="token punctuation">}</span>
 
   handleNetworkChange <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">{</span> online <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
     <span class="token keyword">if</span> <span class="token punctuation">(</span>online<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-      <span class="token keyword">this</span><span class="token punctuation">.</span>interval <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>fetch<span class="token punctuation">,</span> <span class="token number">2000</span><span class="token punctuation">)</span>
       <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-      <span class="token function">clearInterval</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>interval<span class="token punctuation">)</span>
+      <span class="token function">clearTimeout</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>timeout<span class="token punctuation">)</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 
   fetch <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-    <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'https://api.github.com/gists'</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> res<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>gists <span class="token operator">=</span><span class="token operator">></span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> gists <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'https://unsplash.it/640/400/?random'</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>res <span class="token operator">=</span><span class="token operator">></span> res<span class="token punctuation">.</span><span class="token function">blob</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+      <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>blob <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+        <span class="token keyword">var</span> image <span class="token operator">=</span> URL<span class="token punctuation">.</span><span class="token function">createObjectURL</span><span class="token punctuation">(</span>blob<span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> image <span class="token punctuation">}</span><span class="token punctuation">)</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>timeout <span class="token operator">=</span> <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>fetch<span class="token punctuation">,</span> <span class="token number">5000</span><span class="token punctuation">)</span>
+      <span class="token punctuation">}</span><span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
 
   <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
     <span class="token keyword">return</span> <span class="token punctuation">(</span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">style</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> position<span class="token punctuation">:</span> <span class="token string">'relative'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Public Gists<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+        <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>image <span class="token operator">?</span> <span class="token punctuation">(</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>image<span class="token punctuation">}</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>100%<span class="token punctuation">"</span>/</span><span class="token punctuation">></span></span>
+        <span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Loading first image<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+        <span class="token punctuation">)</span><span class="token punctuation">}</span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Network</span>
           <span class="token attr-name">onChange</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>handleNetworkChange<span class="token punctuation">}</span></span>
           <span class="token attr-name">render</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">(</span><span class="token punctuation">{</span> online <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>
             online <span class="token operator">?</span> <span class="token keyword">null</span> <span class="token punctuation">:</span> <span class="token punctuation">(</span>
-              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
-                You are offline<span class="token punctuation">,</span> data will not be updated<span class="token punctuation">.</span>
+              <span class="token operator">&lt;</span>p style<span class="token punctuation">=</span><span class="token punctuation">{</span><span class="token punctuation">{</span> color<span class="token punctuation">:</span> <span class="token string">'red'</span> <span class="token punctuation">}</span><span class="token punctuation">}</span></span><span class="token punctuation">></span></span>
+                You are offline<span class="token punctuation">,</span> images will <span class="token keyword">continue</span> when you <span class="token keyword">get</span> back online<span class="token punctuation">.</span>
               <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
             <span class="token punctuation">)</span>
-          <span class="token punctuation">)</span><span class="token punctuation">}</span></span>
-        <span class="token punctuation">/></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
-          <span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>gists<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token punctuation">(</span>gist<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">(</span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token script language-javascript"><span class="token punctuation">=</span><span class="token punctuation">{</span>gist<span class="token punctuation">.</span>html_url<span class="token punctuation">}</span></span><span class="token punctuation">></span></span><span class="token punctuation">{</span>gist<span class="token punctuation">.</span>description <span class="token operator">||</span> <span class="token string">'No Description'</span><span class="token punctuation">}</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-          <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+          <span class="token punctuation">)</span><span class="token punctuation">}</span>
+        <span class="token operator">/</span><span class="token operator">></span>
       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
     <span class="token punctuation">)</span>
   <span class="token punctuation">}</span>
@@ -290,51 +292,53 @@ ReactDOM.render((
 
 ReactDOM<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>App</span><span class="token punctuation">/></span></span><span class="token punctuation">,</span> DOM_NODE<span class="token punctuation">)</span>
 </code></pre>
-<div id="render-gnb8fok8bb8" class="render-js"></div>
+<div id="render-mp21um8ek9g" class="render-js"></div>
 <script type="text/babel">
-(function() { var DOM_NODE = document.getElementById("render-gnb8fok8bb8");
+(function() { var DOM_NODE = document.getElementById("render-mp21um8ek9g");
 // import Network from 'react-network'
 const Network = ReactNetwork.default
 
 class App extends React.Component {
   state = {
-    gists: []
+    image: null
   }
 
   handleNetworkChange = ({ online }) => {
     if (online) {
-      this.interval = setInterval(this.fetch, 2000)
       this.fetch()
     } else {
-      clearInterval(this.interval)
+      clearTimeout(this.timeout)
     }
   }
 
   fetch = () => {
-    fetch('https://api.github.com/gists')
-      .then(res => res.json())
-      .then(gists => this.setState({ gists }))
+    fetch('https://unsplash.it/640/400/?random')
+      .then(res => res.blob())
+      .then(blob => {
+        var image = URL.createObjectURL(blob)
+        this.setState({ image })
+        this.timeout = setTimeout(this.fetch, 5000)
+      })
   }
 
   render() {
     return (
       <div style={{ position: 'relative' }}>
-        <h1>Public Gists</h1>
+        {this.state.image ? (
+          <img src={this.state.image} width="100%"/>
+        ) : (
+          <p>Loading first image</p>
+        )}
         <Network
           onChange={this.handleNetworkChange}
           render={({ online }) => (
             online ? null : (
-              <p>
-                You are offline, data will not be updated.
+              <p style={{ color: 'red' }}>
+                You are offline, images will continue when you get back online.
               </p>
             )
           )}
         />
-        <ul>
-          {this.state.gists.map((gist) => (
-            <li><a href={gist.html_url}>{gist.description || 'No Description'}</a></li>
-          ))}
-        </ul>
       </div>
     )
   }

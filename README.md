@@ -57,13 +57,13 @@ const Network = ReactNetwork.default
 ReactDOM.render((
   <Network
     onChange={({ online }) => {
-      if (online) {
+      if (online && window.cornify_add) {
         window.cornify_add()
       }
     }}
     render={({ online }) =>
       <div style={{ textAlign: 'center' }}>
-        <p>Every time you go offline, a unicorn is born!</p>
+        <p>Every time you go back online, a unicorn is born!</p>
         <p>
           You can open up the devtools to simulate losing the
           network, or actually turn off your wifi to see these demos.
@@ -107,43 +107,45 @@ const Network = ReactNetwork.default
 
 class App extends React.Component {
   state = {
-    gists: []
+    image: null
   }
 
   handleNetworkChange = ({ online }) => {
     if (online) {
-      this.interval = setInterval(this.fetch, 2000)
       this.fetch()
     } else {
-      clearInterval(this.interval)
+      clearTimeout(this.timeout)
     }
   }
 
   fetch = () => {
-    fetch('https://api.github.com/gists')
-      .then(res => res.json())
-      .then(gists => this.setState({ gists }))
+    fetch('https://unsplash.it/640/400/?random')
+      .then(res => res.blob())
+      .then(blob => {
+        var image = URL.createObjectURL(blob)
+        this.setState({ image })
+        this.timeout = setTimeout(this.fetch, 5000)
+      })
   }
 
   render() {
     return (
       <div style={{ position: 'relative' }}>
-        <h1>Public Gists</h1>
+        {this.state.image ? (
+          <img src={this.state.image} width="100%"/>
+        ) : (
+          <p>Loading first image</p>
+        )}
         <Network
           onChange={this.handleNetworkChange}
           render={({ online }) => (
             online ? null : (
-              <p>
-                You are offline, data will not be updated.
+              <p style={{ color: 'red' }}>
+                You are offline, images will continue when you get back online.
               </p>
             )
           )}
         />
-        <ul>
-          {this.state.gists.map((gist) => (
-            <li><a href={gist.html_url}>{gist.description || 'No Description'}</a></li>
-          ))}
-        </ul>
       </div>
     )
   }
