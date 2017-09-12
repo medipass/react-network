@@ -10,7 +10,7 @@ Notifies your app when the network connection goes online or offline.
 Why?
 ----
 
-Because the next billion users of the internet will have a decent device but a spotty connection. Having a component to help you declarative deal with that is super fantastic.
+Because the next billion users of the internet will have a decent device but a spotty connection. Having a component to help you declaratively deal with that is super fantastic.
 
 Installation
 ------------
