@@ -50,7 +50,7 @@ const Network = ReactNetwork.default
 How?
 ----
 
-```render-babel
+```jsx
 // import Network from 'react-network'
 const Network = ReactNetwork.default
 
@@ -87,7 +87,7 @@ Props
 
 Whatever you'd like to render in response to changes in the network.
 
-```render-babel
+```jsx
 // import Network from 'react-network'
 const Network = ReactNetwork.default
 ReactDOM.render((
@@ -101,7 +101,7 @@ ReactDOM.render((
 
 Called whenever the network goes on or offline. This is useful to fire off some imperative code, like adding unicorns to the page or more practically, avoiding resource fetching until the network comes back online.
 
-```render-babel
+```jsx
 // import Network from 'react-network'
 const Network = ReactNetwork.default
 
