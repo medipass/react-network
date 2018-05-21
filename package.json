@@ -1,6 +1,6 @@
 {
   "name": "react-network",
-  "version": "1.0.1",
+  "version": "1.0.1-canary.0",
   "description": "Notifies your app when the network goes offline and back online.",
   "main": "lib/index.js",
   "module": "es/index.js",
