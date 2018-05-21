@@ -1,5 +1,5 @@
 {
-  "name": "react-network",
+  "name": "@medipass/react-network",
   "version": "1.0.1-canary.0",
   "description": "Notifies your app when the network goes offline and back online.",
   "main": "lib/index.js",
