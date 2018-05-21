@@ -7,7 +7,7 @@ export default class Network extends Component {
   }
 
   state = {
-    online: window.navigator.onLine
+    online: typeof window !== 'undefined' ? window.navigator.onLine : true
   }
 
   componentDidMount() {
